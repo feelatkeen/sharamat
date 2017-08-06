@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ШараМАТ</title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+		<meta charset="UTF-8">
+		<style>
+			body{
+				margin-top:10%;
+				text-align:center;
+				font-family:'Roboto Condensed';
+				color:white;
+				background-color:black;
+			}
+			#slovo{
+				background-color:black;
+				border-style:solid;
+				border-color-white;
+				border-radius:20px;
+				color:white;
+			}
+			.btn{
+				margin-top:5px;
+				background-color:black;
+				border-style:solid;
+				border-color-white;
+				border-radius:20px;
+				color:white;
+			}
+			.btn:hover{
+				background-color:white;
+				color:black;
+			}
+			#warnslovo{
+				color:red
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<h1>ШараМАТ - онлайн конвертер матов в шарараме.</h1>
+		</div>
+		<div class="sharamat">
+			<p>Введите слово:</p>
+			<input id="slovo">
+			<br>
+			<input class="btn" type="button" onClick="generateSlovo()" value="Конвертировать!">
+			<p id="slovorez">Результат</p>
+			<p id="warnslovo"></p>
+		</div>
+		<script>
+			var changeletters = ["х", "т", "р", "а", "у", "о", "н", "в", "c", "к", "е", "к", "з", "б"];
+			var changeto = ["x", "t", "p", "a", "y", "o", "h", "b", "c", "k", "e", "k", "3", "6"];
+			var canban = ["пи", "eб", "xy", "cyk", "шлю", "6ля"]
+			function generateSlovo(){
+				document.querySelector("#warnslovo").textContent = ""
+				var originalWord = document.querySelector("#slovo").value;
+				for(i=0; i < changeletters.length; i++){
+					originalWord = originalWord.replace(changeletters[i], changeto[i])
+				};
+				document.querySelector("#slovorez").textContent = originalWord.toUpperCase()
+				for(a=0; a<canban.length; a++){
+					if(originalWord.indexOf(canban[a]) >= 0){
+						document.querySelector("#warnslovo").textContent = 'Внимание, возможно вас могут забанить! Причина: присуствие "' + canban[a] + '" в слове. Будьте осторожны.'				
+					}
+				}
+				console.log(originalWord)
+			};
+		</script>
+	</body>
+</html>
